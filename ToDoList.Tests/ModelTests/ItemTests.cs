@@ -13,7 +13,7 @@ namespace ToDoList.Tests
     {
       Item.ClearAll();
     }
-    
+
     [TestMethod]
     public void ItemConstructor_CreatesInstanceOfItem_Item()
     {
@@ -47,6 +47,25 @@ namespace ToDoList.Tests
     {
       List<Item> testList = new List<Item> { };
 
+      List<Item> result = Item.GetAll();
+
+      CollectionAssert.AreEqual(testList, result);
+    }
+    [TestMethod]
+    public void GetAll_ReturnsItems_ItemList()
+    {
+      string description01 = "Clean the porch";
+      string description02 = "Clean the bathrooms";
+      string description03 = "Tidy up kitchen";
+      string description04 = "Put all laundry away";
+      string description05 = "Wash all sheets";
+      Item item01 = new Item(description01);
+      Item item02 = new Item(description02);
+      Item item03 = new Item(description03);
+      Item item04 = new Item(description04);
+      Item item05 = new Item(description05);
+
+      List<Item> testList = new List<Item> {item01, item02, item03, item04, item05};
       List<Item> result = Item.GetAll();
 
       CollectionAssert.AreEqual(testList, result);
