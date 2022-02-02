@@ -1,11 +1,19 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using ToDoList.Models;
 
 namespace ToDoList.Tests
 {
   [TestClass]
-  public class ItemTests
+  public class ItemTests : IDisposable
   {
+
+    public void Dispose()
+    {
+      Item.ClearAll();
+    }
+    
     [TestMethod]
     public void ItemConstructor_CreatesInstanceOfItem_Item()
     {
@@ -17,7 +25,9 @@ namespace ToDoList.Tests
     {
       string description = "Clean the porch.";
       Item newItem = new Item(description);
+
       string result = newItem.Description;
+
       Assert.AreEqual(description, result);
     }
     [TestMethod]
@@ -26,9 +36,20 @@ namespace ToDoList.Tests
       string description = "Clean the porch.";
       Item newItem = new Item(description);
       string updatedDescription = "Put away all laundry.";
+
       newItem.Description = updatedDescription;
       string result = newItem.Description;
+
       Assert.AreEqual(updatedDescription, result);
+    }
+    [TestMethod]
+    public void GetAll_ReturnsEmptyList_ItemList()
+    {
+      List<Item> testList = new List<Item> { };
+
+      List<Item> result = Item.GetAll();
+
+      CollectionAssert.AreEqual(testList, result);
     }
   }
 }
